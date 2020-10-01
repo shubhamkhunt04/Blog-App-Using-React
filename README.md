@@ -1,6 +1,6 @@
 # Blog-App-Using-ReactJS
 
-This is a Blog App containing 1000 users data.
+This is a Blog App containing 1000 users data and show blog,post,authors comments.
 
 ## Getting Started
 
