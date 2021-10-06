@@ -1,25 +1,25 @@
-import React, { useReducer, useEffect } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import Axios from "axios";
-import Author from "./Author";
-import Test from "./AuthorListPagination";
-import AuthorDetail from "./AuthorDetail";
-import PostDetail from "./PostDetail";
+import React, {useReducer, useEffect} from 'react'
+import {Switch, Route, Redirect} from 'react-router-dom'
+import Axios from 'axios'
+import Author from './Author'
+import Test from './AuthorListPagination'
+import AuthorDetail from './AuthorDetail'
+import PostDetail from './PostDetail'
 
 //#C3FFA9
 
 const initialState = {
   loading: true,
-  error: "",
+  error: '',
   authors: [],
   posts: [],
   likes: [],
   comments: [],
-};
+}
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "FETCH_SCCESS":
+    case 'FETCH_SCCESS':
       //   console.log("action author state", state.authors);
       //   console.log("author pyload", action.authorsPayload);
       return {
@@ -41,70 +41,70 @@ const reducer = (state, action) => {
           action.commentsPayload !== undefined
             ? action.commentsPayload
             : [...state.comments],
-        error: "",
-      };
-    case "FETCH_ERROR":
+        error: '',
+      }
+    case 'FETCH_ERROR':
       return {
         loading: false,
         authors: [],
         posts: [],
         likes: [],
         comments: [],
-        error: "Something Went Wrong",
-      };
+        error: 'Something Went Wrong',
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
 const MainComponent = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   useEffect(() => {
     const fetchAllData = async () => {
       try {
-        const authors = await Axios.get(`http://localhost:3004/authors`);
-        dispatch({ type: "FETCH_SCCESS", authorsPayload: authors.data });
-        const posts = await Axios.get(`http://localhost:3004/posts`);
-        dispatch({ type: "FETCH_SCCESS", postsPayload: posts.data });
-        const likes = await Axios.get(`http://localhost:3004/likes`);
-        dispatch({ type: "FETCH_SCCESS", likesPayload: likes.data });
-        const comments = await Axios.get(`http://localhost:3004/comments`);
-        dispatch({ type: "FETCH_SCCESS", commentsPayload: comments.data });
+        const authors = await Axios.get(`http://localhost:3004/authors`)
+        dispatch({type: 'FETCH_SCCESS', authorsPayload: authors.data})
+        const posts = await Axios.get(`http://localhost:3004/posts`)
+        dispatch({type: 'FETCH_SCCESS', postsPayload: posts.data})
+        const likes = await Axios.get(`http://localhost:3004/likes`)
+        dispatch({type: 'FETCH_SCCESS', likesPayload: likes.data})
+        const comments = await Axios.get(`http://localhost:3004/comments`)
+        dispatch({type: 'FETCH_SCCESS', commentsPayload: comments.data})
       } catch (err) {
-        dispatch({ type: "FETCH_ERROR" });
+        dispatch({type: 'FETCH_ERROR'})
       }
-    };
-    fetchAllData();
-  }, []);
+    }
+    fetchAllData()
+  }, [])
 
-  const numLikeWiseSorting = (posts) => {
-    console.log("numLikeswise sorting", posts);
+  const numLikeWiseSorting = posts => {
+    console.log('numLikeswise sorting', posts)
 
     posts.sort((a, b) => {
-      return b.numLikes - a.numLikes;
-    });
+      return b.numLikes - a.numLikes
+    })
     // state.posts = posts;
-    console.log("numLikesWiseSorting", posts);
-  };
+    console.log('numLikesWiseSorting', posts)
+  }
 
-  const AuthorWithId = ({ match }) => {
+  const AuthorWithId = ({match}) => {
     // console.log(state.posts);
     return (
       <AuthorDetail
         author={state.authors.filter(
-          (author) => author.id === match.params.authorId
+          author => author.id === match.params.authorId,
         )}
         posts={state.posts.filter(
-          (post) => post.authorId === parseInt(match.params.authorId)
+          post => post.authorId === parseInt(match.params.authorId),
         )}
         numLikeWiseSorting={numLikeWiseSorting}
         // NumLikeSort={state.posts.sort().filter(
         //   (post) => post.authorId === parseInt(match.params.authorId)
         // )}
       />
-    );
-  };
+    )
+  }
 
   // const NumLikeSort = (match)=>{
   //   // console.log(match);
@@ -114,18 +114,18 @@ const MainComponent = () => {
   // }
   //   // console.log(NumLikeSort());
 
-  const PostWithId = ({ match }) => {
+  const PostWithId = ({match}) => {
     return (
       <div>
         <PostDetail
-          post={state.posts.filter((post) => post.id === match.params.postId)}
+          post={state.posts.filter(post => post.id === match.params.postId)}
           comments={state.comments.filter(
-            (comment) => comment.postId === parseInt(match.params.postId)
+            comment => comment.postId === parseInt(match.params.postId),
           )}
         />
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <>
@@ -141,10 +141,10 @@ const MainComponent = () => {
         <Test />
       </Switch>
     </>
-  );
-};
+  )
+}
 
-export default MainComponent;
+export default MainComponent
 // export default React.memo(MainComponent);
 
 // import React, { useReducer, useEffect } from "react";

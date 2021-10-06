@@ -1,7 +1,7 @@
-import React from "react";
-import "./App.css";
-import { BrowserRouter } from "react-router-dom";
-import MainComponent from "./Component/MainComponent";
+import React from 'react'
+import './App.css'
+import {BrowserRouter} from 'react-router-dom'
+import MainComponent from './Component/MainComponent'
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         <MainComponent />
       </div>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App
