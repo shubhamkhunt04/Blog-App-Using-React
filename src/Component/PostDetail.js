@@ -1,13 +1,13 @@
-import React from "react";
-import { Card, CardBody, CardTitle, CardText } from "reactstrap";
-import { Link } from "react-router-dom";
+import React from 'react'
+import {Card, CardBody, CardTitle, CardText} from 'reactstrap'
+import {Link} from 'react-router-dom'
 
-const RenderPost = ({ post }) => {
-  console.log("Post", post);
+const RenderPost = ({post}) => {
+  console.log('Post', post)
   return (
     <div>
       <h1>RenderPost</h1>
-      {post.map((post) => {
+      {post.map(post => {
         return (
           <div key={post.id}>
             <Card className="border border-primary m-2 authorCard">
@@ -16,12 +16,12 @@ const RenderPost = ({ post }) => {
                   Title:-{post.title}
                 </CardTitle>
                 <CardTitle className="font-weight-bold">
-                  DatePublished :- <i className="fa fa-calendar-o"></i>{" "}
+                  DatePublished :- <i className="fa fa-calendar-o"></i>{' '}
                   {new Date(post.datePublished).toDateString()}
                 </CardTitle>
                 <CardTitle className="font-weight-bold">
-                  Likes :-{" "}
-                  <img src="https://img.icons8.com/material/22/000000/thumb-up--v1.png" />{" "}
+                  Likes :-{' '}
+                  <img src="https://img.icons8.com/material/22/000000/thumb-up--v1.png" />{' '}
                   {post.numLikes}
                 </CardTitle>
                 <CardTitle className="font-weight-bold">
@@ -30,18 +30,18 @@ const RenderPost = ({ post }) => {
               </CardBody>
             </Card>
           </div>
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}
 
-const RenderComments = ({ comments }) => {
-  console.log("Comments", comments);
+const RenderComments = ({comments}) => {
+  console.log('Comments', comments)
   return (
     <div>
       <h1> Render Comments</h1>
-      {comments.map((comment) => {
+      {comments.map(comment => {
         return (
           <div key={comment.id}>
             <Card className="border border-primary m-2 authorCard">
@@ -55,19 +55,19 @@ const RenderComments = ({ comments }) => {
               </CardBody>
             </Card>
           </div>
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}
 
-const PostDetail = ({ post, comments }) => {
+const PostDetail = ({post, comments}) => {
   return (
     <div>
       <RenderPost post={post} />
       <RenderComments comments={comments} />
     </div>
-  );
-};
+  )
+}
 
-export default PostDetail;
+export default PostDetail

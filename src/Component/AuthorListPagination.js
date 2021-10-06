@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from "react";
-import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
+import React, {useState, useEffect} from 'react'
+import {Pagination, PaginationItem, PaginationLink} from 'reactstrap'
 
 const AuthorListPagination = ({
   showPerPage,
   onPaginationChange,
   totalAuthors,
 }) => {
-  const [counter, setCounter] = useState(1);
+  const [counter, setCounter] = useState(1)
   const [noOfButton, setNoOfButton] = useState(
-    Math.ceil(totalAuthors / showPerPage)
-  );
+    Math.ceil(totalAuthors / showPerPage),
+  )
 
   useEffect(() => {
-    const total = showPerPage * counter;
-    const starting = total - showPerPage;
-    const ending = total;
-    onPaginationChange(starting, ending);
-    console.log(starting, ending);
-  }, [counter]);
+    const total = showPerPage * counter
+    const starting = total - showPerPage
+    const ending = total
+    onPaginationChange(starting, ending)
+    console.log(starting, ending)
+  }, [counter])
 
-  const onBttonClick = (type) => {
-    if (type === "prev") {
-      counter === 1 ? setCounter(1) : setCounter(counter - 1);
-    } else if (type === "next") {
-      noOfButton === counter ? setCounter(counter) : setCounter(counter + 1);
+  const onBttonClick = type => {
+    if (type === 'prev') {
+      counter === 1 ? setCounter(1) : setCounter(counter - 1)
+    } else if (type === 'next') {
+      noOfButton === counter ? setCounter(counter) : setCounter(counter + 1)
     }
 
     // type==="prev"&&counter===1?setCounter(1):setCounter(counter-1);
@@ -41,19 +41,19 @@ const AuthorListPagination = ({
     //   default:
     //     setCounter(counter);
     // }
-  };
-
-  let numberOfButton = [];
-  for (let i = 0; i < noOfButton; i++) {
-    numberOfButton.push(i + 1);
   }
-  console.log(numberOfButton);
+
+  let numberOfButton = []
+  for (let i = 0; i < noOfButton; i++) {
+    numberOfButton.push(i + 1)
+  }
+  console.log(numberOfButton)
 
   return (
     <div className="d-flex justify-content-center">
       <Pagination size="md">
         <PaginationItem>
-          <PaginationLink onClick={() => onBttonClick("prev")}>
+          <PaginationLink onClick={() => onBttonClick('prev')}>
             Prev
           </PaginationLink>
         </PaginationItem>
@@ -61,26 +61,26 @@ const AuthorListPagination = ({
           return (
             <div key={index}>
               <PaginationItem
-                className={index + 1 === counter ? "active" : null}
+                className={index + 1 === counter ? 'active' : null}
               >
                 <PaginationLink onClick={() => setCounter(index + 1)}>
                   {index + 1}
                 </PaginationLink>
               </PaginationItem>
             </div>
-          );
+          )
         })}
         <PaginationItem>
-          <PaginationLink onClick={() => onBttonClick("next")}>
+          <PaginationLink onClick={() => onBttonClick('next')}>
             Next
           </PaginationLink>
         </PaginationItem>
-      </Pagination>{" "}
+      </Pagination>{' '}
     </div>
-  );
-};
+  )
+}
 
-export default AuthorListPagination;
+export default AuthorListPagination
 
 // For Simple Previous and Next Button
 
